@@ -25,6 +25,7 @@ import UIKit
     @IBOutlet weak open var alertImage: UIImageView!
     @IBOutlet weak open var alertTitle: UILabel!
     @IBOutlet weak open var alertDescription: UILabel!
+    @IBOutlet weak open var alertContentStackView: UIStackView!
     @IBOutlet weak open var alertContentStackViewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak open var alertContentStackViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak open var alertContentStackViewTopConstraint: NSLayoutConstraint!
