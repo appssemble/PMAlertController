@@ -85,7 +85,7 @@ import UIKit
     }
     
     //MARK: - Actions
-    @objc open func addAction(_ alertAction: PMAlertAction){
+    @objc open func addAction(_ alertAction: UIButton){
         alertActionStackView.addArrangedSubview(alertAction)
         
         if alertActionStackView.arrangedSubviews.count > 2 || hasTextFieldAdded(){
@@ -100,8 +100,11 @@ import UIKit
         alertAction.addTarget(self, action: #selector(PMAlertController.dismissAlertController(_:)), for: .touchUpInside)
     }
     
-    @objc fileprivate func dismissAlertController(_ sender: PMAlertAction){
-        self.animateDismissWithGravity(sender.actionStyle)
+    @objc fileprivate func dismissAlertController(_ sender: UIButton){
+        if let pmAlertAction = sender as? PMAlertAction {
+            self.animateDismissWithGravity(pmAlertAction.actionStyle)
+        }
+        
         self.dismiss(animated: true, completion: nil)
     }
     
