@@ -40,6 +40,7 @@ import UIKit
     var animator : UIDynamicAnimator?
     
     open var textFields: [UITextField] = []
+    open var alwaysShowActionsVertically: Bool = false
     
     @objc open var gravityDismissAnimation = true
     @objc open var dismissWithBackgroudTouch = false // enable touch background to dismiss. Off by default.
@@ -88,7 +89,7 @@ import UIKit
     @objc open func addAction(_ alertAction: UIButton){
         alertActionStackView.addArrangedSubview(alertAction)
         
-        if alertActionStackView.arrangedSubviews.count > 2 || hasTextFieldAdded(){
+        if alertActionStackView.arrangedSubviews.count > 2 || hasTextFieldAdded() || alwaysShowActionsVertically {
             alertActionStackViewHeightConstraint.constant = ALERT_STACK_VIEW_HEIGHT * CGFloat(alertActionStackView.arrangedSubviews.count)
             alertActionStackView.axis = .vertical
         }
