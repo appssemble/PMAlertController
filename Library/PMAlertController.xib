@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -26,6 +26,8 @@
                 <outlet property="alertMaskBackground" destination="QvX-0K-co6" id="U8C-Dt-d5N"/>
                 <outlet property="alertTitle" destination="boW-P6-B3N" id="Q1I-HI-El2"/>
                 <outlet property="alertView" destination="dEl-s8-6vU" id="sSB-hF-osA"/>
+                <outlet property="alertViewFixedHeightConstraint" destination="Ctn-DP-TaE" id="QoJ-9n-fbT"/>
+                <outlet property="alertViewHeightConstraint" destination="PzO-yc-cQ1" id="MLw-OL-1ar"/>
                 <outlet property="alertViewWidthConstraint" destination="2KX-8C-U18" id="7hM-KT-GdH"/>
                 <outlet property="headerView" destination="jTz-eN-yAz" id="10g-pC-ZH9"/>
                 <outlet property="headerViewHeightConstraint" destination="mA2-xx-mfB" id="1GQ-Wz-iVX"/>
@@ -100,6 +102,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="357" id="2KX-8C-U18"/>
                         <constraint firstItem="jTz-eN-yAz" firstAttribute="top" secondItem="dEl-s8-6vU" secondAttribute="top" constant="32" id="AT5-Y6-bpb"/>
+                        <constraint firstAttribute="height" constant="342.5" id="Ctn-DP-TaE"/>
                         <constraint firstAttribute="trailing" secondItem="jTz-eN-yAz" secondAttribute="trailing" id="Ddd-hz-T8q"/>
                         <constraint firstItem="LMB-jY-4In" firstAttribute="leading" secondItem="dEl-s8-6vU" secondAttribute="leading" constant="8" id="JoG-bm-Y31"/>
                         <constraint firstAttribute="bottom" secondItem="WJc-5g-auJ" secondAttribute="bottom" id="P7Y-tt-2D9"/>
@@ -111,6 +114,11 @@
                         <constraint firstAttribute="trailing" secondItem="LMB-jY-4In" secondAttribute="trailing" constant="8" id="faR-Xx-08y"/>
                         <constraint firstItem="WJc-5g-auJ" firstAttribute="top" secondItem="LMB-jY-4In" secondAttribute="bottom" constant="8" id="rQm-Go-qos"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Ctn-DP-TaE"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>

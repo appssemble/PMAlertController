@@ -19,6 +19,8 @@ import UIKit
     @IBOutlet weak open var alertMaskBackground: UIImageView!
     @IBOutlet weak open var alertView: UIView!
     @IBOutlet weak open var alertViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak open var alertViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak open var alertViewFixedHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak open var headerView: UIView!
     @IBOutlet weak open var headerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak open var headerViewTopSpaceConstraint: NSLayoutConstraint!
@@ -46,6 +48,11 @@ import UIKit
     @objc open var dismissWithBackgroudTouch = false // enable touch background to dismiss. Off by default.
     
     //MARK: - Lifecycle
+    
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupOrientationConstraints(initialSetup: true)
+    }
     
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -83,6 +90,7 @@ import UIKit
         alertMaskBackground.addGestureRecognizer(tapRecognizer)
         
         setShadowAlertView()
+        subscribeToNotifications()
     }
     
     //MARK: - Actions
@@ -117,7 +125,7 @@ import UIKit
         self.animateDismissWithGravity(.cancel)
         self.dismiss(animated: true, completion: nil)
     }
-
+    
     //MARK: - Text Fields
     @objc open func addTextField(textField:UITextField? = nil, _ configuration: (_ textField: UITextField?) -> Void){
         let textField = textField ?? UITextField()
@@ -223,6 +231,42 @@ import UIKit
             
             keyboardHasBeenShown = false
         }
+    }
+    
+    @objc func didChangeOrientation() {
+        setupOrientationConstraints()
+    }
+    
+    private func subscribeToNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didChangeOrientation), name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    fileprivate func setupOrientationConstraints(initialSetup: Bool = false) {
+        switch UIDevice.current.orientation {
+        case .portrait:
+            if initialSetup {
+                return
+            }
+            
+            alertViewHeightConstraint?.isActive = true
+            alertViewFixedHeightConstraint?.isActive = false
+            alertViewWidthConstraint?.constant = UIScreen.main.bounds.width - 36
+            alertActionStackViewHeightConstraint.constant = ALERT_STACK_VIEW_HEIGHT * CGFloat(alertActionStackView.arrangedSubviews.count)
+            alertActionStackView.axis = .vertical
+        case .landscapeLeft, .landscapeRight:
+            alertViewHeightConstraint?.isActive = false
+            alertViewFixedHeightConstraint?.constant = UIScreen.main.bounds.height - 24
+            alertViewFixedHeightConstraint?.isActive = true
+            alertViewWidthConstraint?.constant = UIScreen.main.bounds.width - 36
+            alertActionStackViewHeightConstraint.constant = ALERT_STACK_VIEW_HEIGHT
+            alertActionStackView.axis = .horizontal
+        default:
+            break
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
